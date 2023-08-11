@@ -1,0 +1,8 @@
+.sidebar {
+    grid-area: sidebar;
+    height: 100vh;
+    background-color: #61dafb;
+}
+ul li {
+    list-style: none;
+}

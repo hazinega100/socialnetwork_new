@@ -1,0 +1,22 @@
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #282c34;
+    padding: 0 20px;
+}
+.headerImg {
+    height: 80px;
+}
+.headerLogIn {
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.headerLogIn:hover {
+    transition: all .5s;
+    color: #61dafb;
+}

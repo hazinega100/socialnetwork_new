@@ -1,0 +1,18 @@
+.personal {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 20px;
+    width: 400px;
+}
+.avatar {
+    height: 60px;
+    border-radius: 50%;
+}
+.nameTitle {
+
+}
+.description {
+
+}
