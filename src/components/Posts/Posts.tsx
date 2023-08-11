@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './Posts.module.css'
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
@@ -11,15 +11,10 @@ type PostsType = {
     message: string | null
 }
 
-type PropsType = {
-    callback: () => void
-}
-
-export const Posts = ({callback}: PropsType) => {
+export const Posts = () => {
     const [backgroundColor, setBackgroundColor] = useState<string>('#61dafb');
     const [value, setValue] = useState<string>('')
     const [posts, setPosts] = useState<PostsType[]>([])
-    const [rightPosition, setRightPosition] = useState<boolean>(true)
 
     const onChangHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
@@ -32,11 +27,6 @@ export const Posts = ({callback}: PropsType) => {
         const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
         setBackgroundColor(randomColor);
         setValue('')
-        if (rightPosition) {
-            setRightPosition(false)
-        } else {
-            setRightPosition(true)
-        }
     }
     const pressEnterKey = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.code == 'Enter') {
@@ -65,7 +55,7 @@ export const Posts = ({callback}: PropsType) => {
                 </Button>
             </div>
             {posts.map(p => {
-                return <Post rightPosition={rightPosition} key={p.id} postMessage={p.message} backgroundColor={p.avatar}/>
+                return <Post key={p.id} postMessage={p.message} backgroundColor={p.avatar}/>
             })}
         </div>
     );

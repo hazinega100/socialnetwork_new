@@ -3,11 +3,6 @@
     display: flex;
     align-items: center;
 }
-.postRevers {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-}
 .post_avatar {
     width: 50px;
     height: 50px;
@@ -17,5 +12,11 @@
     margin-left: 30px;
     font-weight: bold;
     font-size: 18px;
+    color: gray;
+}
+.like_btn {
+    margin-left: 20px;
+}
+.like_counter {
     color: gray;
 }
