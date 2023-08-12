@@ -1,8 +1,23 @@
-.sidebar {
-    grid-area: sidebar;
-    height: 100vh;
+.navbar {
+    grid-area: navbar;
+    padding: 20px;
     background-color: #61dafb;
 }
+
 ul li {
     list-style: none;
+}
+
+.item {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.active {
+    text-decoration: none;
+    color: darkred;
+    font-size: 18px;
+    font-weight: bold;
 }
