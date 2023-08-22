@@ -8,8 +8,14 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {useSelector} from "react-redux";
+import {RootState} from "./store/store";
+import {DialogItemType, MessageType, PostType} from "./Types/types";
 
 function App() {
+    const posts = useSelector<RootState, PostType[]>(state => state.stateReducer.profilePage.posts)
+    const dialogs = useSelector<RootState, DialogItemType[]>(state => state.stateReducer.dialogsPage.dialogs)
+    const messages = useSelector<RootState, MessageType[]>(state => state.stateReducer.dialogsPage.messages)
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -17,11 +23,13 @@ function App() {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/' element={<Profile/>} />
-                        <Route path='/dialogs' element={<Dialogs/>} />
-                        <Route path='/news' Component={News} />
-                        <Route path='/music' Component={Music} />
-                        <Route path='/settings' Component={Settings} />
+                        <Route path='/' element={<Profile posts={posts} />} />
+                        <Route path='/dialogs' element={<Dialogs dialogsData={dialogs}
+                                                                 messagesData={messages}
+                        />} />
+                        <Route path='/news' element={<News />} />
+                        <Route path='/music' element={<Music />} />
+                        <Route path='/settings' element={<Settings />} />
                     </Routes>
                 </div>
             </div>

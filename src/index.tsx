@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createGlobalStyle} from "styled-components";
+import {Provider} from "react-redux";
+import {store} from "./store/store";
 
 const Global = createGlobalStyle`
   * {
@@ -20,7 +22,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <>
         <Global/>
-        <App/>
+        <Provider store={store}>
+            <App />
+        </Provider>
     </>
 );
 

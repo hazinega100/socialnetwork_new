@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+import {DialogItemType, MessageType} from "../../Types/types";
 
-export const Dialogs = () => {
+type DialogsType = {
+    dialogsData: DialogItemType[]
+    messagesData: MessageType[]
+}
+
+export const Dialogs: FC<DialogsType> = ({dialogsData, messagesData}) => {
     return (
         <div>
             <h3>Dialogs</h3>
             <div className={s.dialogs}>
                 <div className={s.dialogsItem}>
-                    <DialogItem id={"1"} nameItem={"EgaHazin"}/>
-                    <DialogItem id={"2"} nameItem={"Nelly"}/>
-                    <DialogItem id={"3"} nameItem={"Gulbahor"}/>
+                    {dialogsData.map(item => <DialogItem key={item.id} id={item.id} name={item.name}/>)}
                 </div>
                 <div className={s.messages}>
-                    <div className={s.message}>Hi</div>
-                    <div className={s.message}>Hello</div>
-                    <div className={s.message}>Yo</div>
+                    {messagesData.map((m,index) => <Message key={index} message={m.message} />)}
                 </div>
             </div>
         </div>

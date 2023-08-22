@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "./Person.module.css";
+import s from "./ProfileInfo.module.css";
 
 const avatar = 'https://cdn5.vectorstock.com/i/1000x1000/98/64/fitness-gym-logo-with-strong-athlete-and-barbell-vector-24189864.jpg'
 
-export const Person = () => {
+export const ProfileInfo = () => {
     return (
-        <div className={s.personal}>
+        <div className={s.profileInfo}>
             <img className={s.avatar} src={avatar} alt="avatar"/>
             <div className={s.description}>
                 <h4>EgaHazin</h4>
