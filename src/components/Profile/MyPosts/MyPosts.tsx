@@ -12,15 +12,14 @@ type PropsType = {
 }
 
 export const MyPosts: FC<PropsType> = ({posts}) => {
+    const dispatch = useDispatch()
     const [backgroundColor, setBackgroundColor] = useState<string>('#61dafb');
     const [value, setValue] = useState<string>('')
-    const dispatch = useDispatch()
 
-    const onChangHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
     }
-    const pushPost = () => {
-        // const newPost = localStorage.getItem('post')
+    const addPost = () => {
         dispatch(addPostAC(backgroundColor, value))
         // random backgroundColor
         const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -29,7 +28,7 @@ export const MyPosts: FC<PropsType> = ({posts}) => {
     }
     const pressEnterKey = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.code === 'Enter') {
-            pushPost()
+            addPost()
         }
     }
     return (
@@ -38,7 +37,7 @@ export const MyPosts: FC<PropsType> = ({posts}) => {
             <div>
                 <TextField className={s.myPostsTextField}
                            value={value}
-                           onChange={onChangHandler}
+                           onChange={onChangeHandler}
                            onKeyPress={pressEnterKey}
                            id="filled-basic"
                            label="Your news"
@@ -48,7 +47,7 @@ export const MyPosts: FC<PropsType> = ({posts}) => {
             <div className={s.myPostsBtn}>
                 <Button variant="contained"
                         color="success"
-                        onClick={pushPost}
+                        onClick={addPost}
                 >
                     Send
                 </Button>

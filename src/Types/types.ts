@@ -12,8 +12,12 @@ export type DialogItemType = {
     name: string
 }
 
-export type InitStateType = {
-    profilePage: {posts: PostType[]}
+export type PostsInitStateType = {
+    profilePage: {
+        posts: PostType[]
+    }
+}
+export type DialogsInitStateType = {
     dialogsPage: {
         dialogs: DialogItemType[]
         messages: MessageType[]

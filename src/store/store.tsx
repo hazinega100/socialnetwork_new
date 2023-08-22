@@ -1,8 +1,10 @@
 import {combineReducers, legacy_createStore, Store} from "redux";
-import reducer from "../reducers/reducer";
+import postsReducer from "../reducers/postsReducer";
+import dialogsReducer from "../reducers/dialogsReducer";
 
 const rootReducer = combineReducers({
-    stateReducer: reducer
+    posts: postsReducer,
+    dialogs: dialogsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

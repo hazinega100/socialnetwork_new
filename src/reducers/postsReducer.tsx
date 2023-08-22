@@ -1,30 +1,18 @@
 import React from 'react';
-import {InitStateType, PostType} from "../Types/types";
+import {PostsInitStateType, PostType} from "../Types/types";
 import {v1} from "uuid";
 import {AddPostType} from "../actions/addPostAC";
 import {IncrLikeCounterType} from "../actions/incrLikeCounterAC";
 
-const initState: InitStateType = {
+const initState: PostsInitStateType = {
     profilePage: {
         posts: [],
-    },
-    dialogsPage: {
-        dialogs: [
-            {id: '1', name: 'EgaHazin'},
-            {id: '2', name: 'Nelly'},
-            {id: '3', name: 'Gulbahor'},
-        ],
-        messages: [
-            {message: 'Hi'},
-            {message: 'Hello'},
-            {message: 'Yo'},
-        ],
     }
 }
 
 type ActionType = AddPostType | IncrLikeCounterType
 
-const reducer = (state = initState, action: ActionType) => {
+const postsReducer = (state = initState, action: ActionType) => {
     switch (action.type) {
         case "ADD_POST": {
             const newPost: PostType = {
@@ -42,7 +30,6 @@ const reducer = (state = initState, action: ActionType) => {
             }
         }
         case "INCR_LIKE_COUNTER": {
-            console.log(action)
             return {
                 ...state,
                 profilePage: {
@@ -57,4 +44,4 @@ const reducer = (state = initState, action: ActionType) => {
     }
 };
 
-export default reducer;
+export default postsReducer;
