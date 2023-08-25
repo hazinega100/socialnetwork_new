@@ -13,9 +13,9 @@ import {RootState} from "./store/store";
 import {DialogItemType, MessageType, PostType} from "./Types/types";
 
 function App() {
-    const posts = useSelector<RootState, PostType[]>(state => state.posts.profilePage.posts)
-    const dialogs = useSelector<RootState, DialogItemType[]>(state => state.dialogs.dialogsPage.dialogs)
-    const messages = useSelector<RootState, MessageType[]>(state => state.dialogs.dialogsPage.messages)
+    const posts = useSelector<RootState, PostType[]>(state => state.profilePage.profilePage.posts)
+    const dialogs = useSelector<RootState, DialogItemType[]>(state => state.dialogsPage.dialogsPage.dialogs)
+    const messages = useSelector<RootState, MessageType[]>(state => state.dialogsPage.dialogsPage.messages)
     return (
         <BrowserRouter>
             <div className="app-wrapper">

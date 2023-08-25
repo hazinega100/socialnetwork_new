@@ -1,31 +1,18 @@
-import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css'
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import {Post} from "./Post/Post";
 import {PostType} from "../../../Types/types";
-import {useDispatch} from "react-redux";
-import {addPostAC} from "../../../actions/addPostAC";
 
 type PropsType = {
     posts: PostType[]
+    value: string
+    onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    addPost: () => void
 }
 
-export const MyPosts: FC<PropsType> = ({posts}) => {
-    const dispatch = useDispatch()
-    const [backgroundColor, setBackgroundColor] = useState<string>('#61dafb');
-    const [value, setValue] = useState<string>('')
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setValue(e.currentTarget.value)
-    }
-    const addPost = () => {
-        dispatch(addPostAC(backgroundColor, value))
-        // random backgroundColor
-        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-        setBackgroundColor(randomColor);
-        setValue('')
-    }
+export const MyPosts: FC<PropsType> = ({posts, addPost, onChange, value}) => {
     const pressEnterKey = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.code === 'Enter') {
             addPost()
@@ -37,7 +24,7 @@ export const MyPosts: FC<PropsType> = ({posts}) => {
             <div>
                 <TextField className={s.myPostsTextField}
                            value={value}
-                           onChange={onChangeHandler}
+                           onChange={onChange}
                            onKeyPress={pressEnterKey}
                            id="filled-basic"
                            label="Your news"
