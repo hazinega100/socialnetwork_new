@@ -1,19 +1,27 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from "./ProfileInfo.module.css";
+import {ProfileUserType} from "../../../Types/types";
 
-const avatar = 'https://cdn5.vectorstock.com/i/1000x1000/98/64/fitness-gym-logo-with-strong-athlete-and-barbell-vector-24189864.jpg'
+const basePhoto = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
 
-export const ProfileInfo = () => {
+type PropsType = {
+    userProfile: ProfileUserType | null
+}
+
+export const ProfileInfo: FC<PropsType> = React.memo(({userProfile}) => {
+    if (!userProfile) {
+        return null
+    }
     return (
         <div className={s.profileInfo}>
-            <img className={s.avatar} src={avatar} alt="avatar"/>
+            <img className={s.avatar} src={userProfile.photos.large !== null ? userProfile.photos.large : basePhoto} alt="avatar"/>
             <div className={s.description}>
-                <h4>EgaHazin</h4>
-                <div>Data of Birth: 17 apr 1988</div>
+                <h4>{userProfile.fullName}</h4>
+                <div>About Me: {userProfile.aboutMe}</div>
                 <div>City: SPb</div>
                 <div>Education: KTT'09</div>
-                <div>Web Site: <a href="https://egahazin.ru">https://egahazin.ru</a></div>
+                <div>Web Site: <a href={userProfile.contacts.website}>{userProfile.contacts.website}</a></div>
             </div>
         </div>
     );
-};
+})

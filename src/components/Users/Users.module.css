@@ -1,0 +1,40 @@
+.users {
+    display: none;
+}
+.user {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+.title {
+    margin: 20px;
+}
+.user_img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.current_page {
+    margin: 5px;
+    cursor: pointer;
+}
+.current_page:hover {
+    transition: font-size .2s;
+    font-size: 18px;
+    margin: 5px;
+    cursor: pointer;
+}
+.current_page_active {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 5px;
+    cursor: pointer;
+}
+.loader_center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

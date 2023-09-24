@@ -8,7 +8,7 @@ export const Navbar = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink className={navData => navData.isActive ? s.active : s.item} to="/">Profile</NavLink>
+                        <NavLink className={navData => navData.isActive ? s.active : s.item} to="/profile">Profile</NavLink>
                     </li>
                     <li>
                         <NavLink className={navData => navData.isActive ? s.active : s.item}
@@ -19,6 +19,9 @@ export const Navbar = () => {
                     </li>
                     <li>
                         <NavLink className={navData => navData.isActive ? s.active : s.item} to="/music">Music</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={navData => navData.isActive ? s.active : s.item} to="/users">Users</NavLink>
                     </li>
                     <li>
                         <NavLink className={navData => navData.isActive ? s.active : s.item}

@@ -23,6 +23,8 @@ export const MyPostsContainer: FC<PropsType> = ({posts}) => {
         setBackgroundColor(randomColor);
         setValue('')
     }
+
+
     return <MyPosts posts={posts}
                     value={value}
                     onChange={onChangeHandler}

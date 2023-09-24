@@ -9,13 +9,20 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {useSelector} from "react-redux";
-import {RootState} from "./store/store";
-import {DialogItemType, MessageType, PostType} from "./Types/types";
+import {RootStateType} from "./store/store";
+import {DialogItemType, MessageType, ProfileInitStateType, UserType} from "./Types/types";
+import {Users} from "./components/Users/Users";
 
 function App() {
-    const posts = useSelector<RootState, PostType[]>(state => state.profilePage.profilePage.posts)
-    const dialogs = useSelector<RootState, DialogItemType[]>(state => state.dialogsPage.dialogsPage.dialogs)
-    const messages = useSelector<RootState, MessageType[]>(state => state.dialogsPage.dialogsPage.messages)
+    const profilePage = useSelector<RootStateType, ProfileInitStateType>(state => state.profilePage)
+    const dialogs = useSelector<RootStateType, DialogItemType[]>(state => state.dialogsPage.dialogs)
+    const messages = useSelector<RootStateType, MessageType[]>(state => state.dialogsPage.messages)
+    const users = useSelector<RootStateType, UserType[]>(state => state.usersPage.users)
+    const pageSize = useSelector<RootStateType, number>(state => state.usersPage.pageSize)
+    const currentPage = useSelector<RootStateType, number>(state => state.usersPage.currentPage)
+    const totalUsersCount = useSelector<RootStateType, number>(state => state.usersPage.totalUsersCount)
+    const isFetching = useSelector<RootStateType, boolean>(state => state.usersPage.isFetching)
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -23,12 +30,18 @@ function App() {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/' element={<Profile posts={posts} />} />
-                        <Route path='/dialogs' element={<Dialogs dialogsData={dialogs}
+                        <Route path='/profile/*' element={<Profile profilePage={profilePage} />} />
+                        <Route path='/dialogs/*' element={<Dialogs dialogsData={dialogs}
                                                                  messagesData={messages}
                         />} />
                         <Route path='/news' element={<News />} />
                         <Route path='/music' element={<Music />} />
+                        <Route path='/users' element={<Users users={users}
+                                                             pageSize={pageSize}
+                                                             currentPage={currentPage}
+                                                             totalUsersCount={totalUsersCount}
+                                                             isFetching={isFetching}
+                        />} />
                         <Route path='/settings' element={<Settings />} />
                     </Routes>
                 </div>
