@@ -18,8 +18,8 @@ export const ProfileInfo: FC<PropsType> = React.memo(({userProfile}) => {
             <div className={s.description}>
                 <h4>{userProfile.fullName}</h4>
                 <div>About Me: {userProfile.aboutMe}</div>
-                <div>City: SPb</div>
-                <div>Education: KTT'09</div>
+                <div>YouTube: {userProfile.contacts.youtube}</div>
+                <div>GitHub: {userProfile.contacts.github}</div>
                 <div>Web Site: <a href={userProfile.contacts.website}>{userProfile.contacts.website}</a></div>
             </div>
         </div>
