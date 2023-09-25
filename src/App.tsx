@@ -22,6 +22,7 @@ function App() {
     const currentPage = useSelector<RootStateType, number>(state => state.usersPage.currentPage)
     const totalUsersCount = useSelector<RootStateType, number>(state => state.usersPage.totalUsersCount)
     const isFetching = useSelector<RootStateType, boolean>(state => state.usersPage.isFetching)
+    console.log('alala')
 
     return (
         <BrowserRouter>

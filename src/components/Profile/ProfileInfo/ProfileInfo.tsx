@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import s from "./ProfileInfo.module.css";
 import {ProfileUserType} from "../../../Types/types";
+import {Preloader} from "../../common/Preloader/Preloader";
 
 const basePhoto = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
 
@@ -10,11 +11,11 @@ type PropsType = {
 
 export const ProfileInfo: FC<PropsType> = React.memo(({userProfile}) => {
     if (!userProfile) {
-        return null
+        return <Preloader/>
     }
     return (
         <div className={s.profileInfo}>
-            <img className={s.avatar} src={userProfile.photos.large !== null ? userProfile.photos.large : basePhoto} alt="avatar"/>
+            <img className={s.avatar} src={userProfile.photos.small !== null ? userProfile.photos.small : basePhoto} alt="avatar"/>
             <div className={s.description}>
                 <h4>{userProfile.fullName}</h4>
                 <div>About Me: {userProfile.aboutMe}</div>
