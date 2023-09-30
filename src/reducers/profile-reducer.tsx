@@ -1,5 +1,5 @@
 import React from 'react';
-import {PostType, ProfileInitStateType, ProfileUserType} from "../Types/types";
+import {PostType, ProfileInitStateType} from "../Types/types";
 import {v1} from "uuid";
 import {AddPostType} from "../actions/addPostAC";
 import {IncrLikeCounterType} from "../actions/incrLikeCounterAC";

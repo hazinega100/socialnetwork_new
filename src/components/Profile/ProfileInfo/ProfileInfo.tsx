@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import s from "./ProfileInfo.module.css";
 import {ProfileUserType} from "../../../Types/types";
-import {Preloader} from "../../common/Preloader/Preloader";
+import {News} from "../../News/News";
 
 const basePhoto = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
 
@@ -11,7 +11,7 @@ type PropsType = {
 
 export const ProfileInfo: FC<PropsType> = React.memo(({userProfile}) => {
     if (!userProfile) {
-        return <Preloader/>
+        return <News />
     }
     return (
         <div className={s.profileInfo}>

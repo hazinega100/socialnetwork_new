@@ -13,19 +13,19 @@ export type DialogItemType = {
 }
 export type ProfileUserType = {
     userId: number
-    aboutMe: string | null
+    aboutMe: string
     lookingForAJob: boolean
-    lookingForAJobDescription: string | null
+    lookingForAJobDescription: string
     fullName: string
     contacts: {
-        github: string | null
-        vk: string | null
-        facebook: string | null
-        instagram: string | null
-        twitter: string | null
-        website: string | undefined
-        youtube: string | null
-        mainLink: string | null
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
     },
     photos: {
         small: string | null
