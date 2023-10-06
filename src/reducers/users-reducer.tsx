@@ -6,13 +6,15 @@ import {SetUsersACType} from "../actions/setUsersAC";
 import {SetPagesACType} from "../actions/setPagesAC";
 import {SetCurrentPageACType} from "../actions/setCurrentPageAC";
 import {SetIsFetchingACType} from "../actions/setIsFetchingAC";
+import {FollowingProgressACType} from "../actions/followingProgressAC";
 
 const initState: UsersInitStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 type ActionType = FollowACType
@@ -21,6 +23,7 @@ type ActionType = FollowACType
     | SetPagesACType
     | SetCurrentPageACType
     | SetIsFetchingACType
+    | FollowingProgressACType
 
 const usersReducer = (state = initState, action: ActionType) => {
     switch (action.type) {
@@ -34,6 +37,14 @@ const usersReducer = (state = initState, action: ActionType) => {
             return {
                 ...state,
                 users: state.users.map(el => el.id === action.payload.id ? {...el, followed: false} : el)
+            }
+        }
+        case "FOLLOWING_PROGRESS": {
+            return {
+                ...state,
+                followingInProgress: action.progress
+                    ? [...state.followingInProgress, action.userID]
+                    : state.followingInProgress.filter(id => id !== action.userID)
             }
         }
         case "SET_USERS": {

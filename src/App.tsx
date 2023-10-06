@@ -22,7 +22,10 @@ function App() {
     const currentPage = useSelector<RootStateType, number>(state => state.usersPage.currentPage)
     const totalUsersCount = useSelector<RootStateType, number>(state => state.usersPage.totalUsersCount)
     const isFetching = useSelector<RootStateType, boolean>(state => state.usersPage.isFetching)
+    const followingProgress = useSelector<RootStateType, number[]>(state => state.usersPage.followingInProgress)
     const auth = useSelector<RootStateType, AuthStateType>(state => state.auth)
+
+    console.log(followingProgress)
 
     return (
         <BrowserRouter>
@@ -43,6 +46,7 @@ function App() {
                                                              totalUsersCount={totalUsersCount}
                                                              isFetching={isFetching}
                                                              auth={auth.isAuth}
+                                                             followingProgress={followingProgress}
                         />}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>

@@ -14,6 +14,7 @@ import {setUserProfileTC} from "../../reducers/profile-reducer";
 import {followTC} from "../../actions/ThankActions/followTC";
 import {unfollowTC} from "../../actions/ThankActions/unfollowTC";
 import {usersApi} from "../../api/usersApi";
+import {followingProgressAC} from "../../actions/followingProgressAC";
 
 type PropsType = {
     users: UserType[]
@@ -22,11 +23,12 @@ type PropsType = {
     totalUsersCount: number
     isFetching: boolean
     auth: boolean
+    followingProgress: number[]
 }
 
 const userPhoto: string = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
 
-export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching, auth}: PropsType) => {
+export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching, auth, followingProgress}: PropsType) => {
     const dispatch = useDispatch<AppDispatchType>()
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -79,9 +81,11 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                     users.map(u => {
                         const onClickFollow = () => {
                             dispatch(followTC(u.id))
+                            dispatch(followingProgressAC(u.id, true))
                         }
                         const onClickUnfollow = () => {
                             dispatch(unfollowTC(u.id))
+                            dispatch(followingProgressAC(u.id, true))
                         }
                         return (
                             <ul key={u.id}>
@@ -100,7 +104,7 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                                                   variant="contained"
                                                   color="success"
                                                   size="small"
-                                                  disabled={!auth}
+                                                  disabled={!auth || followingProgress.some(id => id === u.id)}
                                         >
                                             Follow
                                         </Button>
@@ -108,7 +112,7 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                                                   variant="contained"
                                                   color="error"
                                                   size="small"
-                                                  disabled={!auth}
+                                                  disabled={!auth || followingProgress.some(id => id === u.id)}
                                         >
                                             Unfollow
                                         </Button>
