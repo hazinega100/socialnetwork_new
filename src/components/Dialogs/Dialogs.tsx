@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useDispatch} from "react-redux";
 import {addMessageAC} from "../../actions/addMessageAC";
+import {Container} from "../styles/Container.styled";
 
 type DialogsType = {
     dialogsData: DialogItemType[]
@@ -24,7 +25,7 @@ export const Dialogs: FC<DialogsType> = ({dialogsData, messagesData}) => {
         setValue('')
     }
     return (
-        <div>
+        <Container>
             <h3>Dialogs</h3>
             <div className={s.dialogs}>
                 <div className={s.dialogsItem}>
@@ -48,6 +49,6 @@ export const Dialogs: FC<DialogsType> = ({dialogsData, messagesData}) => {
                     {messagesData.map((m,index) => <Message key={index} message={m.message} />)}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };

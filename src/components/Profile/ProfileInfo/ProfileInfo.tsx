@@ -11,7 +11,7 @@ type PropsType = {
 
 export const ProfileInfo: FC<PropsType> = React.memo(({userProfile}) => {
     if (!userProfile) {
-        return <News />
+        return <News/>
     }
     return (
         <div className={s.profileInfo}>

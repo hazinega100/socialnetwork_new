@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileUserType} from "../Types/types";
+import {ProfileUserType, UserType} from "../Types/types";
 
 const settings = {
     withCredentials: true,
@@ -12,7 +12,29 @@ const instance = axios.create({
 })
 
 export const usersApi = {
+    getUsers(currentPage: number, pageSize: number) {
+        return instance.get<GetUsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+    },
     getProfileUser(userID: number) {
         return instance.get<ProfileUserType>(`profile/${userID}`)
+    },
+    followUser(userID: number) {
+        return instance.post<FollowResponseType>(`follow/${userID}`, {})
+    },
+    unfollowUser(userID: number) {
+        return instance.delete<FollowResponseType>(`follow/${userID}`)
     }
+}
+
+type GetUsersResponseType = {
+    items: UserType[]
+    error: string | null
+    totalCount: number
+}
+
+type FollowResponseType = {
+    data: {}
+    fieldsErrors: string[]
+    messages: string[]
+    resultCode: number
 }

@@ -47,6 +47,7 @@ export type UserType = {
         large: string
     },
     followed: boolean
+    uniqueUrlName: string | null
 }
 
 export type DialogsInitStateType = {
@@ -59,4 +60,13 @@ export type UsersInitStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+}
+
+export type AuthStateType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+    isFetching: boolean
+    messages: string[]
 }

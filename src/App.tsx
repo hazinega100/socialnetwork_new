@@ -10,7 +10,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {useSelector} from "react-redux";
 import {RootStateType} from "./store/store";
-import {DialogItemType, MessageType, ProfileInitStateType, UserType} from "./Types/types";
+import {AuthStateType, DialogItemType, MessageType, ProfileInitStateType, UserType} from "./Types/types";
 import {Users} from "./components/Users/Users";
 
 function App() {
@@ -22,27 +22,29 @@ function App() {
     const currentPage = useSelector<RootStateType, number>(state => state.usersPage.currentPage)
     const totalUsersCount = useSelector<RootStateType, number>(state => state.usersPage.totalUsersCount)
     const isFetching = useSelector<RootStateType, boolean>(state => state.usersPage.isFetching)
+    const auth = useSelector<RootStateType, AuthStateType>(state => state.auth)
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <Header auth={auth}/>
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile/*' element={<Profile profilePage={profilePage} />} />
+                        <Route path='/profile/*' element={<Profile profilePage={profilePage}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogsData={dialogs}
-                                                                 messagesData={messages}
-                        />} />
-                        <Route path='/news' element={<News />} />
-                        <Route path='/music' element={<Music />} />
+                                                                   messagesData={messages}
+                        />}/>
+                        <Route path='/news' element={<News/>}/>
+                        <Route path='/music' element={<Music/>}/>
                         <Route path='/users' element={<Users users={users}
                                                              pageSize={pageSize}
                                                              currentPage={currentPage}
                                                              totalUsersCount={totalUsersCount}
                                                              isFetching={isFetching}
-                        />} />
-                        <Route path='/settings' element={<Settings />} />
+                                                             auth={auth.isAuth}
+                        />}/>
+                        <Route path='/settings' element={<Settings/>}/>
                     </Routes>
                 </div>
             </div>

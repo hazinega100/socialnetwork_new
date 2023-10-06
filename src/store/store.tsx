@@ -4,12 +4,14 @@ import profileReducer from "../reducers/profile-reducer";
 import sidebarReducer from "../reducers/sidebar-reducer";
 import usersReducer from "../reducers/users-reducer";
 import thunk, {ThunkDispatch} from "redux-thunk";
+import authReducer from "../reducers/auth-reducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebarPage: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

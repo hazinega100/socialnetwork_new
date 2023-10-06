@@ -5,7 +5,6 @@ import {UnfollowACType} from "../actions/unollowAC";
 import {SetUsersACType} from "../actions/setUsersAC";
 import {SetPagesACType} from "../actions/setPagesAC";
 import {SetCurrentPageACType} from "../actions/setCurrentPageAC";
-import {getUsersTC} from "../actions/ThankActions/getUsersTC";
 import {SetIsFetchingACType} from "../actions/setIsFetchingAC";
 
 const initState: UsersInitStateType = {

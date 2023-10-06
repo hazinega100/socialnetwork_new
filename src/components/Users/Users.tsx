@@ -2,10 +2,7 @@ import React, {useEffect} from 'react';
 import s from './Users.module.css'
 import {UserType} from "../../Types/types";
 import {useDispatch} from "react-redux";
-import {followAC} from "../../actions/followAC";
-import {unfollowAC} from "../../actions/unollowAC";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import {setUsersAC} from "../../actions/setUsersAC";
 import {setPagesAC} from "../../actions/setPagesAC";
 import {setCurrentPageAC} from "../../actions/setCurrentPageAC";
@@ -14,6 +11,9 @@ import {setIsFetchingAC} from "../../actions/setIsFetchingAC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import {setUserProfileTC} from "../../reducers/profile-reducer";
+import {followTC} from "../../actions/ThankActions/followTC";
+import {unfollowTC} from "../../actions/ThankActions/unfollowTC";
+import {usersApi} from "../../api/usersApi";
 
 type PropsType = {
     users: UserType[]
@@ -21,11 +21,12 @@ type PropsType = {
     currentPage: number
     totalUsersCount: number
     isFetching: boolean
+    auth: boolean
 }
 
 const userPhoto: string = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
 
-export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching}: PropsType) => {
+export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching, auth}: PropsType) => {
     const dispatch = useDispatch<AppDispatchType>()
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -40,7 +41,7 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
 
     useEffect(() => {
         dispatch(setIsFetchingAC(true))
-        axios(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+        usersApi.getUsers(currentPage, pageSize)
             .then(response => {
                 dispatch(setUsersAC(response.data.items))
                 dispatch(setPagesAC(response.data.totalCount))
@@ -73,36 +74,46 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                 })}
             </div>
             <div className={isFetching ? s.loader_center : ''}>
-                {isFetching ? <Preloader /> : null}
+                {isFetching ? <Preloader/> : null}
                 {
                     users.map(u => {
-                        const onClickHandler = () => {
-                            if (!u.followed) {
-                                dispatch(followAC(u.id))
-                            } else {
-                                dispatch(unfollowAC(u.id))
-                            }
+                        const onClickFollow = () => {
+                            dispatch(followTC(u.id))
+                        }
+                        const onClickUnfollow = () => {
+                            dispatch(unfollowTC(u.id))
                         }
                         return (
                             <ul key={u.id}>
-                                <div className={isFetching ? s.users : s.user}>
+                                <li className={isFetching ? s.users : s.user}>
                                     <div>
                                         <NavLink to={`/profile/${u.id}`} onClick={() => openProfileUser(u.id)}>
                                             <img className={s.user_img}
                                                  src={u.photos.small != null ? u.photos.small : userPhoto}
                                                  alt="avatar"/>
-                                            <li>{u.name}</li>
+                                            <h4>{u.name}</h4>
                                         </NavLink>
                                         <p>{u.status}</p>
                                     </div>
-                                    <Button onClick={onClickHandler}
-                                            variant="contained"
-                                            color="success"
-                                            size="small"
-                                    >
-                                        {u.followed ? "unfollow" : "follow"}
-                                    </Button>
-                                </div>
+                                    {!u.followed
+                                        ? <Button onClick={onClickFollow}
+                                                  variant="contained"
+                                                  color="success"
+                                                  size="small"
+                                                  disabled={!auth}
+                                        >
+                                            Follow
+                                        </Button>
+                                        : <Button onClick={onClickUnfollow}
+                                                  variant="contained"
+                                                  color="error"
+                                                  size="small"
+                                                  disabled={!auth}
+                                        >
+                                            Unfollow
+                                        </Button>
+                                    }
+                                </li>
                             </ul>
                         )
                     })
