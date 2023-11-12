@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import s from './Users.module.css'
 import {UserType} from "../../Types/types";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from "@mui/material/Button";
 import {setUsersAC} from "../../actions/setUsersAC";
 import {setPagesAC} from "../../actions/setPagesAC";
 import {setCurrentPageAC} from "../../actions/setCurrentPageAC";
-import {AppDispatchType} from "../../store/store";
+import {AppDispatchType, RootStateType} from "../../store/store";
 import {setIsFetchingAC} from "../../actions/setIsFetchingAC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
@@ -15,6 +15,8 @@ import {followTC} from "../../actions/ThankActions/followTC";
 import {unfollowTC} from "../../actions/ThankActions/unfollowTC";
 import {usersApi} from "../../api/usersApi";
 import {followingProgressAC} from "../../actions/followingProgressAC";
+import {UserPhoto} from "../UserPhoto/UserPhoto";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type PropsType = {
     users: UserType[]
@@ -22,13 +24,11 @@ type PropsType = {
     currentPage: number
     totalUsersCount: number
     isFetching: boolean
-    auth: boolean
     followingProgress: number[]
 }
 
-const userPhoto: string = "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Cutout.png"
-
-export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching, auth, followingProgress}: PropsType) => {
+const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching, followingProgress}: PropsType) => {
+    const auth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
     const dispatch = useDispatch<AppDispatchType>()
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -40,7 +40,6 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
     useEffect(() => {
         dispatch(setIsFetchingAC(true))
         usersApi.getUsers(currentPage, pageSize)
@@ -49,7 +48,6 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                 dispatch(setPagesAC(response.data.totalCount))
                 dispatch(setIsFetchingAC(false))
             })
-        // dispatch(getUsersTC)
     }, [currentPage, totalUsersCount])
 
     const changePage = (p: number) => {
@@ -92,9 +90,7 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
                                 <li className={isFetching ? s.users : s.user}>
                                     <div>
                                         <NavLink to={`/profile/${u.id}`} onClick={() => openProfileUser(u.id)}>
-                                            <img className={s.user_img}
-                                                 src={u.photos.small != null ? u.photos.small : userPhoto}
-                                                 alt="avatar"/>
+                                            <UserPhoto photos={u.photos} />
                                             <h4>{u.name}</h4>
                                         </NavLink>
                                         <p>{u.status}</p>
@@ -126,3 +122,5 @@ export const Users = ({users, pageSize, currentPage, totalUsersCount, isFetching
         </>
     );
 };
+
+export const UsersPage = withAuthRedirect(Users)

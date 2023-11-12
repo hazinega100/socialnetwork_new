@@ -5,16 +5,16 @@ import Message from "./Message/Message";
 import {DialogItemType, MessageType} from "../../Types/types";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addMessageAC} from "../../actions/addMessageAC";
 import {Container} from "../styles/Container.styled";
+import {Navigate} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {RootStateType} from "../../store/store";
 
-type DialogsType = {
-    dialogsData: DialogItemType[]
-    messagesData: MessageType[]
-}
-
-export const Dialogs: FC<DialogsType> = ({dialogsData, messagesData}) => {
+const Dialogs = () => {
+    const dialogsData = useSelector<RootStateType, DialogItemType[]>(state => state.dialogsPage.dialogs)
+    const messagesData = useSelector<RootStateType, MessageType[]>(state => state.dialogsPage.messages)
     const dispatch = useDispatch()
     const [value, setValue] = useState<string>('')
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,3 +52,5 @@ export const Dialogs: FC<DialogsType> = ({dialogsData, messagesData}) => {
         </Container>
     );
 };
+
+export const DialogsPage = withAuthRedirect(Dialogs)

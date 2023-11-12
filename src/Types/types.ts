@@ -28,8 +28,8 @@ export type ProfileUserType = {
         mainLink: string
     },
     photos: {
-        small: string | null
-        large: string | null
+        small: string
+        large: string
     }
 }
 

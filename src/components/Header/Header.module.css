@@ -9,6 +9,16 @@
 .headerImg {
     height: 80px;
 }
+.headerAva {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.headerLoginWrapper {
+    display: flex;
+    align-items: center;
+}
 .headerLogIn {
     font-weight: bold;
     font-size: 24px;

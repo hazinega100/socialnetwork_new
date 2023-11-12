@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import {Users} from "../Users/Users";
+import {UsersPage} from "../Users/Users";
 
-export const UsersStyled = styled(Users)`
+export const UsersStyled = styled(UsersPage)`
   width: 1000px;
   max-width: 100%;
   padding: 0 20px;

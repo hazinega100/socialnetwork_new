@@ -3,7 +3,8 @@ import {SetUserDataACType} from "../actions/setAuthUserDataAC";
 import {AuthStateType} from "../Types/types";
 import {SetMessagesLogInACType} from "../actions/setMessagesLogInAC";
 
-const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_MESSAGES = 'SET_MESSAGES'
 
 const initState: AuthStateType = {
     id: null,
@@ -26,7 +27,7 @@ const authReducer = (state = initState, action: ActionType): AuthStateType => {
                 isAuth: true
             }
         }
-        case "SET_MESSAGES": {
+        case SET_MESSAGES: {
             return {
                 ...state,
                 messages: action.messages
