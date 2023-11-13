@@ -36,6 +36,7 @@ export type ProfileUserType = {
 export type ProfileInitStateType = {
     posts: PostType[]
     userProfile: ProfileUserType | null
+    status: string
 }
 
 export type UserType = {

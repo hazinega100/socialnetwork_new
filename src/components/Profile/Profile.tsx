@@ -6,6 +6,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {useSelector} from "react-redux";
 import {RootStateType} from "../../store/store";
+import wave from "../../images/wave.jpeg"
 
 const profileImg = 'https://targetjobs.co.uk/static/0b3187ee346dcd5ce9cd0b7277afcbb5/a4e0a/fitness-centre-manager_1140x350.jpg'
 
@@ -18,7 +19,7 @@ const Profile: FC<PropsType> = React.memo(() => {
     return (
         <div className={s.profile}>
             <div>
-                <img className={s.profileImg} src={profileImg} alt="profileImg"/>
+                <img className={s.profileImg} src={wave} alt="profileImg"/>
             </div>
             <ProfileInfo userProfile={profilePage.userProfile}/>
             <MyPostsContainer posts={profilePage.posts} />

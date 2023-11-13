@@ -1,4 +1,6 @@
 .myPosts {
+    position: relative;
+    top: 300px;
     display: flex;
     flex-direction: column;
     width: 80%;

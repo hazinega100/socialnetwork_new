@@ -2,6 +2,8 @@
     padding: 0 200px 0 15px;
 }
 .profileImg {
-    width: 100%;
+    position: absolute;
+    width: 850px;
     height: 250px;
+    z-index: -1;
 }

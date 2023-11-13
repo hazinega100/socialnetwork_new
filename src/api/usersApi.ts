@@ -18,6 +18,12 @@ export const usersApi = {
     getProfileUser(userID: number) {
         return instance.get<ProfileUserType>(`profile/${userID}`)
     },
+    getUserStatus(userID: number) {
+        return instance.get<string>(`/profile/status/${userID}`)
+    },
+    changeStatus(status: string) {
+        return instance.put<ChangeStatusType>(`/profile/status`, { status: status })
+    },
     followUser(userID: number) {
         return instance.post<FollowResponseType>(`follow/${userID}`, {})
     },
@@ -30,6 +36,12 @@ type GetUsersResponseType = {
     items: UserType[]
     error: string | null
     totalCount: number
+}
+
+type ChangeStatusType = {
+    resultCode: number
+    messages: string[]
+    data: {}
 }
 
 type FollowResponseType = {
